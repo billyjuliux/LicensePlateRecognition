@@ -6,9 +6,10 @@ function ret = segmentPlate(plateImg)
     % apply thresholding using imbinarize
     binImg = imbinarize(plateImg);
 
-    % apply morphological opening to remove noise
-    se = strel('disk', 2);
-    binImg = imopen(binImg, se);
+    % Remove small objects
+    cleanImg = bwareaopen(binImg, round(0.01 * numel(binImg)));
 
-    ret = binImg
+    segments = regionprops(cleanImg, 'Image', 'BoundingBox');
+
+    ret = segments
 end
