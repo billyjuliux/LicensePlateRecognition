@@ -1,5 +1,4 @@
 function ret = detectChar(letterImg)
-    % load templates
     load templateFile;
 
     tempLabel = [

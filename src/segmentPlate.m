@@ -7,9 +7,14 @@ function ret = segmentPlate(plateImg)
     binImg = imbinarize(plateImg);
 
     % Remove small objects
-    cleanImg = bwareaopen(binImg, round(0.01 * numel(binImg)));
+    cleanImg = bwareaopen(binImg, round(0.001 * numel(binImg)));
 
-    segments = regionprops(cleanImg, 'Image', 'BoundingBox');
+    if bwarea(cleanImg) < bwarea(~cleanImg)
+        segments = regionprops(cleanImg, 'Image', 'BoundingBox');
+    else
+
+        segments = regionprops(~cleanImg, 'Image', 'BoundingBox');
+    end
 
     ret = segments
 end
