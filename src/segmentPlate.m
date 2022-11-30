@@ -9,6 +9,8 @@ function ret = segmentPlate(plateImg)
     % Remove small objects
     cleanImg = bwareaopen(binImg, round(0.001 * numel(binImg)));
 
+    % if the white part of the image is bigger than the black part, invert the image
+    % Segment image and get bounding box
     if bwarea(cleanImg) < bwarea(~cleanImg)
         segments = regionprops(cleanImg, 'Image', 'BoundingBox');
     else

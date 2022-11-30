@@ -1,5 +1,10 @@
+% Script file for loading templates
+
+% Directory
 templateDir = '../img/charTemplate';
 
+% All the template chars
+% Some chars have multiple versions to account for different fonts
 A = imread(fullfile(templateDir, 'A.bmp'));
 B = imread(fullfile(templateDir, 'B.bmp'));
 C = imread(fullfile(templateDir, 'C.bmp'));
@@ -14,6 +19,7 @@ J = imread(fullfile(templateDir, 'J.bmp'));
 K = imread(fullfile(templateDir, 'K.bmp'));
 L = imread(fullfile(templateDir, 'L.bmp'));
 M = imread(fullfile(templateDir, 'M.bmp'));
+M2 = imread(fullfile(templateDir, 'M_2.bmp'));
 N = imread(fullfile(templateDir, 'N.bmp'));
 O = imread(fullfile(templateDir, 'O.bmp'));
 P = imread(fullfile(templateDir, 'P.bmp'));
@@ -40,11 +46,13 @@ eight = imread(fullfile(templateDir, '8.bmp'));
 nine = imread(fullfile(templateDir, '9.bmp'));
 zero = imread(fullfile(templateDir, '0.bmp'));
 
-letters = [A B C D E F G H I I2 J K L M N O P Q R S T U V W X Y Z];
+letters = [A B C D E F G H I I2 J K L M M2 N O P Q R S T U V W X Y Z];
 
 numbers = [one one2 two three four five six seven eight nine zero];
 
 template = [letters numbers];
+
+% Save template to a .mat file
 save ('templateFile', 'template')
 
 clear all
