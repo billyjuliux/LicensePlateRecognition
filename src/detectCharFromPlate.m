@@ -1,4 +1,4 @@
-function [letters, bbImg] = detectCharFromPlate(img)
+function [letters, bbImg] = detectCharFromPlate(img, method, net)
     % Turn image into grayscale
     grayimg = im2gray(img);
 
@@ -12,7 +12,11 @@ function [letters, bbImg] = detectCharFromPlate(img)
 
     % For each character, do a template matching for char recognition
     for i = 1:length(chars)
-        letters = [letters, detectChar(chars{i})];
+        if (method == 'CNN')
+            letters = [letters, detectCharCNN(net, chars{i})];
+        else
+            letters = [letters, detectChar(chars{i})];
+        end
 
         % Draw bounding box on original image
         BB = bb{i};
