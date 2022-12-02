@@ -23,15 +23,14 @@ function plate = detectPlate(image)
     mask = imerode(clearedBorder, se);
     mask = imerode(mask, se);
 
-    figure, imshow(labeloverlay(image, mask));
-
     % Get plate region
     regions = regionprops(mask, 'BoundingBox', 'Area', 'Image');
     boundingBox = regions.BoundingBox;
     max = regions.Area;
 
     for i = 1:numel(regions)
-       if regions(i).Area > max
+       [y, x] = size(regions(i).Image);
+       if regions(i).Area > max && x > (3 * y) && x < (5 * y)
            max = regions(i).Area;
            boundingBox = regions(i).BoundingBox;
        end
