@@ -1,4 +1,4 @@
-function plate = findPlate(image)
+function plate = detectPlate(image)
 
     % Convert input image to grayscale
     grayImg = im2gray(image);
@@ -19,11 +19,9 @@ function plate = findPlate(image)
     clearedBorder = imclearborder(filledimg, 4);
 
     % Erode mask
-    se = strel('diamond', 1);
+    se = strel('diamond', 3);
     mask = imerode(clearedBorder, se);
     mask = imerode(mask, se);
-
-    figure, imshow(labeloverlay(image, mask));
 
     % Get plate region
     regions = regionprops(mask, 'BoundingBox', 'Area', 'Image');
@@ -31,7 +29,8 @@ function plate = findPlate(image)
     max = regions.Area;
 
     for i = 1:numel(regions)
-       if max < regions(i).Area
+       [y, x] = size(regions(i).Image);
+       if regions(i).Area > max && x > (3 * y) && x < (5 * y)
            max = regions(i).Area;
            boundingBox = regions(i).BoundingBox;
        end
