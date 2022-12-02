@@ -45,10 +45,11 @@ seven = imread(fullfile(templateDir, '7.bmp'));
 eight = imread(fullfile(templateDir, '8.bmp'));
 nine = imread(fullfile(templateDir, '9.bmp'));
 zero = imread(fullfile(templateDir, '0.bmp'));
+zero2 = imread(fullfile(templateDir, '0_2.bmp'));
 
 letters = [A B C D E F G H I I2 J K L M M2 N O P Q R S T U V W X Y Z];
 
-numbers = [one one2 two three four five six seven eight nine zero];
+numbers = [one one2 two three four five six seven eight nine zero zero2];
 
 template = [letters numbers];
 
